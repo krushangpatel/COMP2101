@@ -1,22 +1,28 @@
 #!/bin/bash
-titles=("one" "two" "three")
-number=$(( ${#titles[@]}))
-random=$(( RANDOM % number))
-time=$(date +'%A, %I:%M %p')
-hostname=$(hostname)
-weekday=$(date +%u)
-variable=$(cat <<EOF
-Welcome to planet $hostname, ${titles[$random]} $USER!
+#
+# This script produces the dynamic welcome message
+# it should look like
+#   Welcome to planet hostname, title name!
 
-$(if [ "$weekday" = "6" ] || [ "$weekday" = "7" ]
-then
-   echo "It is $time on Weekend."
-else
-   echo "It is $time on Weekday."
-fi
-)
-EOF
-)
+# Improve this script by using the value in the automatic variable $USER for the name
+# Improve this script by adding some time and day of the week information to the welcome message
+#   Use a format like this:
+#   It is HH:MM AM on weekday.
+
+###############
+# Variables   #
+###############
+currenttimeandday=`date +"%I:%M %p %A"`
+title="loading"
+myname="Krushang"
+hostname=$(hostname)
+echo Current Time is: ${currenttimeandday}
+
+###############
+# Main        #
+###############
 cat <<EOF
-$(cowsay$variable)
+
+Welcome to planet $hostname, "$title $myname!"
+
 EOF
