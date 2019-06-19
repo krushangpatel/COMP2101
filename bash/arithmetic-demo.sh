@@ -20,12 +20,16 @@ dividend=$((firstnum / secondnum))
 multiplication=$((firstnum * secondnum))
 fpdividend=$(awk "BEGIN{printf \"%.2f\", $firstnum/$secondnum}")
 power=$((firstnum ** secondnum))
+reminder=$((firstnum % secondnum))
 
 cat <<EOF
+$firstnum reminder $secondnum is :: $reminder
 $firstnum plus $secondnum is:: $sum
 $firstnum subtraction $secondnum is:: $subtraction
 $firstnum multiplication $secondnum is:: $multiplication
 $firstnum power $secondnum is:: $power
 $firstnum divided by $secondnum is:: $dividend
+$firstnum reminder $secondnum is :: $reminder
   - More precisely, it is:: $fpdividend
+
 EOF
