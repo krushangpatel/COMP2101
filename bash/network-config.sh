@@ -33,7 +33,7 @@
 #   interface_name=$(ip a |awk '/: e/{gsub(/:/,"");print $2}')
 #================================================================
 myhostname=$(hostname)
-interfacename=$(ip a |awk '/: e/{gsub(/:/,"");print $2}')
+interface=$(ip a |awk '/: e/{gsub(/:/,"");print $2}')
 lanipaddress=$(ip a s $(ip a | awk '/: e/{gsub(/:/,"");print $2}') | awk '/inet /{gsub(/\/.*/,"");print $2}')
 lanhostname=$(getent hosts $lanipaddress| awk '{print $2}')
 NetworkHostname=$(getent networks | awk '{print $ 1}')
