@@ -1,11 +1,4 @@
 #!/bin/bash
-
-# This script demonstrates how to trap signals and handle them using functions
-
-# Task: Add traps for the INT and QUIT signals. If the script receives an INT signal,
-#       reset the count to the maximum and tell the user they are not allowed to interrupt
-#       the count. If the script receives a QUIT signal, tell the user they found the secret
-#       to getting out of the script and exit immediately.
 trap reset 2
 trap foundsecret 3
 # Task: Explain in a comment how the line with the word moose in it works.
@@ -13,17 +6,11 @@ function foundsecret {
   echo "you found out secret to getting out of script."
   exit
 }
-#### Variables
+#### Var
 programName="$(basename $0)" # used by error_functions.sh
 sleepTime=1 # delay used by sleeptime
 numberOfSleeps=10 # how many sleeps to wait for before quitting for inactivity
-
-#### Functions
-
-# This function will send an error message to stderr
-# Usage:
-#   error-message ["some text to print to stderr"]
-#
+#### Fn
 function error-message {
   #task :  It prints programname and first args
   # > redirect standard output (implicit 1)
@@ -90,4 +77,4 @@ while [ $sleepCount -gt 0 ]; do
     sleep $sleepTime
     sleepCount=$((sleepCount - 1))
 done
-echo "Wait counter expired, exiting peacefully"
+echo "Wait the counter is expired, exiting peacefully"
