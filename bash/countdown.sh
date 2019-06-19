@@ -6,9 +6,13 @@
 #       reset the count to the maximum and tell the user they are not allowed to interrupt
 #       the count. If the script receives a QUIT signal, tell the user they found the secret
 #       to getting out of the script and exit immediately.
-
+trap reset 2
+trap foundsecret 3
 # Task: Explain in a comment how the line with the word moose in it works.
-
+function foundsecret {
+  echo "you found out secret to getting out of script."
+  exit
+}
 #### Variables
 programName="$(basename $0)" # used by error_functions.sh
 sleepTime=1 # delay used by sleeptime
@@ -21,6 +25,11 @@ numberOfSleeps=10 # how many sleeps to wait for before quitting for inactivity
 #   error-message ["some text to print to stderr"]
 #
 function error-message {
+  #task :  It prints programname and first args
+  # > redirect standard output (implicit 1)
+  # $ what comes next is a file description , not a file (only for a right hand side of > )
+  # 2 stderr file descriptor number
+  # redirect stdout from echo command to stderr
         echo "${programName}: ${1:-Unknown Error - a moose bit my sister once...}" >&2
 }
 
@@ -72,7 +81,10 @@ if [ ! $sleepTime -gt 0 ]; then
 fi
 
 sleepCount=$numberOfSleeps
-
+function reset {
+  echo "you are not allowed to interrupt the count ."
+  sleepCount=$(($numberOfSleeps+1))
+}
 while [ $sleepCount -gt 0 ]; do
     echo "Waiting $sleepCount more times for signals"
     sleep $sleepTime
